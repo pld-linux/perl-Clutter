@@ -82,8 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{perl_vendorarch}/%{pdir}/Model
 %dir %{perl_vendorarch}/%{pdir}/Path
 %{perl_vendorarch}/%{pdir}/*/*.pod
-%dir %{perl_vendorarch}/%{pdir}/Install
-%{perl_vendorarch}/%{pdir}/Install/*
+%{perl_vendorarch}/%{pdir}/Install
 %dir %{perl_vendorarch}/auto/%{pdir}/
 %{perl_vendorarch}/auto/%{pdir}/*.bs
 %attr(755,root,root) %{perl_vendorarch}/auto/%{pdir}/*.so
