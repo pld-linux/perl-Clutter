@@ -13,6 +13,7 @@ Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-authors/id/E/EB/EBASSI/Clutter-%{version}.tar.gz
 # Source0-md5:	a11bbe7a45a4f66c4015fd8b88c432b4
 URL:		http://search.cpan.org/dist/Clutter/
+BuildRequires:	clutter-devel
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 %if %{with tests}
@@ -22,6 +23,7 @@ BuildRequires:	perl(Pango) >= 1.140
 BuildRequires:	perl-Cairo >= 1.000
 BuildRequires:	perl-Glib >= 1.220
 %endif
+Requires:	clutter
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
