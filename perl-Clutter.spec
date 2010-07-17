@@ -16,6 +16,7 @@ URL:		http://search.cpan.org/dist/Clutter/
 BuildRequires:	clutter-devel
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
+BuildRequires:	xorg-proto-glproto-devel
 %if %{with tests}
 BuildRequires:	perl(ExtUtils::Depends) >= 0.300
 BuildRequires:	perl(ExtUtils::PkgConfig)
