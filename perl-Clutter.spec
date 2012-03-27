@@ -7,7 +7,7 @@
 Summary:	Clutter - Simple GL-based canvas library
 Name:		perl-Clutter
 Version:	1.002
-Release:	2
+Release:	3
 License:	perl, lgpl
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-authors/id/E/EB/EBASSI/Clutter-%{version}.tar.gz
