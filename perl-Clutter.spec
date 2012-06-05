@@ -1,51 +1,46 @@
 #
 # Conditional build:
-%bcond_without	tests		# do not perform "make test"
+%bcond_with	tests		# perform "make test" (requires DISPLAY)
 #
 %include	/usr/lib/rpm/macros.perl
 %define	pdir	Clutter
-Summary:	Clutter - Simple GL-based canvas library
+Summary:	Clutter - Perl bindings for the Clutter 1.x API
+Summary(pl.UTF-8):	Clutter - wiązania Perla do API biblioteki Clutter 1.x
 Name:		perl-Clutter
-Version:	1.002
-Release:	3
-License:	perl, lgpl
+Version:	1.110
+Release:	1
+License:	LGPL v2.1
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-authors/id/E/EB/EBASSI/Clutter-%{version}.tar.gz
-# Source0-md5:	a11bbe7a45a4f66c4015fd8b88c432b4
+# Source0-md5:	0bfc0a9463daf8ce25a84b54d01781c0
 URL:		http://search.cpan.org/dist/Clutter/
-BuildRequires:	clutter-devel
+BuildRequires:	perl-ExtUtils-MakeMaker >= 6.30
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
-BuildRequires:	xorg-proto-glproto-devel
 %if %{with tests}
-BuildRequires:	perl(ExtUtils::Depends) >= 0.300
-BuildRequires:	perl(ExtUtils::PkgConfig)
-BuildRequires:	perl(Pango) >= 1.140
-BuildRequires:	perl-Cairo >= 1.000
-BuildRequires:	perl-Glib >= 1.220
+BuildRequires:	perl-Cairo-GObject >= 1.000
+BuildRequires:	perl-Glib >= 1.253
+BuildRequires:	perl-Glib-Object-Introspection >= 0.002
+BuildRequires:	perl-Pango >= 1.220
 %endif
-Requires:	clutter
+Requires:	perl-Cairo-GObject >= 1.000
+Requires:	perl-Glib >= 1.253
+Requires:	perl-Glib-Object-Introspection >= 0.002
+Requires:	perl-Pango >= 1.220
+# clutter with gobject binding
+Requires:	clutter >= 1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Clutter is a GObject based library for creating fast, visually rich
-graphical user interfaces. It is intended for creating single window
-heavily stylised applications such as media box UI's, presentations or
-kiosk style programs in preference to regular 'desktop' style
-applications.
+This module allows you to use the Clutter library from Perl to create
+dynamic, compelling, and portable graphical user interfaces, using a
+Perlish and object oriented API.
 
-Clutter's underlying graphics rendering is OpenGL (version 1.2+)
-based. The clutter API is intended to be easy to use, attempting to
-hide many of the GL complexities. It targets mainly 2D based graphics
-and is definetly not intended to be a general interface for all OpenGL
-functionality.
-
-As well as OpenGL Clutter depends on and uses Glib, Glib::Object,
-Pango and Cairo.
-
-For more informations about Clutter, visit:
-
-http://www.clutter-project.org
+%description -l pl.UTF-8
+Ten moduł pozwala na wykorzystywanie biblioteki Clutter z poziomu
+Perla w celu tworzenia dynamicznych, przenośnych graficznych
+interfejsów użytkownika przy użyciu perlowego, zorientowanego
+obiektowo API.
 
 %prep
 %setup -q -n %{pdir}-%{version}
@@ -65,7 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} pure_install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+install -d $RPM_BUILD_ROOT%{_examplesdir}
 cp -a examples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
@@ -73,21 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README
-%dir %{perl_vendorarch}/%{pdir}/
-%{perl_vendorarch}/%{pdir}.pm
-%{perl_vendorarch}/%{pdir}/*.pm
-%{perl_vendorarch}/%{pdir}/*.pod
-%dir %{perl_vendorarch}/%{pdir}/Behaviour
-%dir %{perl_vendorarch}/%{pdir}/Cogl
-%dir %{perl_vendorarch}/%{pdir}/Container
-%dir %{perl_vendorarch}/%{pdir}/Event
-%dir %{perl_vendorarch}/%{pdir}/Model
-%dir %{perl_vendorarch}/%{pdir}/Path
-%{perl_vendorarch}/%{pdir}/*/*.pod
-%{perl_vendorarch}/%{pdir}/Install
-%dir %{perl_vendorarch}/auto/%{pdir}/
-%{perl_vendorarch}/auto/%{pdir}/*.bs
-%attr(755,root,root) %{perl_vendorarch}/auto/%{pdir}/*.so
-%{_mandir}/man3/*
+%doc README
+%{perl_vendorlib}/Clutter.pm
+%{_mandir}/man3/Clutter.3pm*
 %{_examplesdir}/%{name}-%{version}
