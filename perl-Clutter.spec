@@ -2,7 +2,6 @@
 # Conditional build:
 %bcond_with	tests		# perform "make test" (requires DISPLAY)
 #
-%include	/usr/lib/rpm/macros.perl
 %define	pdir	Clutter
 Summary:	Clutter - Perl bindings for the Clutter 1.x API
 Summary(pl.UTF-8):	Clutter - wiązania Perla do API biblioteki Clutter 1.x
